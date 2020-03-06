@@ -271,9 +271,9 @@ class GamePlayer:
 
     def print_status_info(self, current_room: dict) -> None:
         """Print out info about player and <current room>."""
-        print(f'\nHi {NAME}, you are in room {current_room["room_id"]}. \nCurrent cooldown: {self.cooldown}'
+        print(f'\nHi {NAME}, you are in room {current_room["room_id"]}! \nCurrent cooldown: {self.cooldown}'
               f'\nInventory: {", ".join([item["name"][:-9] for item in self.items_]) if self.items_ else "None"} '
-              f'\nPlayers in room: {", ".join(current_room["players"]) if current_room["players"] else "None"} '
+              f'\nOther players in the room are: {", ".join(current_room["players"]) if current_room["players"] else "None"} '
               f'\nGold: {self.gold}, Lambda Coins: {self.balance_}, Snitches: {self.snitches}'
               f'\nEncumbrance: {self.encumbrance}, Strength: {self.strength}')
 
@@ -285,14 +285,14 @@ class GamePlayer:
 
     def sell_things(self) -> None:
         """Move to the shop and sell all the treasure."""
-        print('\nGoing to sell this treasure...')
+        print('\nOff to sell treasure...')
         path = self.find_path(int(self.places['shop']['room_id']))
 
         if self.dash_:
             self.dash(path)
         else:
             self.take_path(path)
-        print('\nGot to the shop.')
+        print("\nYou've arrived at the shop.")
         self.sell()
         self.status()
 
@@ -309,40 +309,40 @@ class GamePlayer:
 
     def name_change(self) -> None:
         """Go to the name changing pirate and get your true name."""
-        print('\nGoing to pirate...')
+        print('\nHeading to see Pirate Ry...')
         path = self.find_path(int(self.places['pirate']['room_id']))
         self.take_path(path)
-        print('\nGot to pirate.')
+        print('\nAhoy matey!.')
         self.change_name()
         self.name_changed = True
         self.status()
 
     def to_dash(self) -> None:
         """Go to the dash shrine and pray."""
-        print('\nGoing to dash...')
+        print('\nOff to the shrine to pray for new powers. (dash)')
         path = self.find_path(int(self.places['dash']['room_id']))
         self.take_path(path)
-        print(f'\nGot to dash.')
+        print(f'\nYou now can now dash!')
         self.pray()
         self.dash_ = True
         self.status()
 
     def to_flight(self) -> None:
         """Go to the flight shrine and pray."""
-        print('\nGoing to flight...')
+        print('\nOff to the shrine to pray for new powers. (flight)')
         path = self.find_path(int(self.places['flight']['room_id']))
         self.take_path(path)
-        print(f'\nGot to flight.')
+        print(f'\nYou can now fly!')
         self.pray()
         self.flight = True
         self.status()
 
     def to_warp(self) -> None:
         """Go to the warp shrine and pray."""
-        print('\nGoing to warp...')
+        print('\nOff to the shrine to pray for additional powers. (warp)')
         path = self.find_path(self.places['warp']['room_id'])
         self.dash(path)
-        print('\nGot to warp shrine.')
+        print('\nYou can now warp to higher dimensions! WOW.')
         self.pray()
         self.warp_ = True
         self.status()
@@ -353,10 +353,10 @@ class GamePlayer:
         self.warp()
         # Make sure self.current_room is correct.
         self.initialize_player()
-        print('\nGoing to well...\n')
+        print('\nHeading to the Wishing Well...\n')
         path = self.find_path(self.places['warp_well']['room_id'])
         self.dash(path)
-        print('\nWishing...')
+        print('\nMake a wish.')
         self.wish()
         print('\nGoing to snitch...')
         path = self.find_path(int(self.places['mine']['room_id']))
@@ -367,15 +367,15 @@ class GamePlayer:
 
     def coin_dash(self) -> None:
         """Dash to the well, then the mine, mine a coin."""
-        print('\nGoing to wishing well...\n')
+        print('\nHeading to the Wishing Well...\n')
         path = self.find_path(int(self.places['well']['room_id']))
         self.dash(path)
-        print('\nGot to the wishing well.')
+        print("\nYou've arrived at the wishing well.")
         self.wish()
-        print('\nGoing to the mine...')
+        print('\nOff to the mine.')
         path = self.find_path(int(self.places['mine']['room_id']))
         self.dash(path)
-        print('\nGot to the mine.')
+        print("\nYou've arrived at the mine.")
         self.proof()
 
     def play(self) -> None:
