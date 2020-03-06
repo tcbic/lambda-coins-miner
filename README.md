@@ -23,9 +23,3 @@ To do:
     - `>>> from play_it import GamePlayer`
     - `>>> game = GamePlayer()`
     - `>>> game.auto_play()`    
-# docwalk
-# dockwalk
-# dockwalk
-
-comment to commit
-# docwalk
